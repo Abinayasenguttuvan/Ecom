@@ -230,20 +230,50 @@
   
   <div class="mobile-menu" id="mobileMenu">
     <ul>
-    <li><a href="./index.html">HOME</a></li>
-        <li><a href="./men.html">MEN</a></li>
-            <li><a href="./women.html">WOMEN</a></li>
-                <li><a href="./about.html">ABOUT</a></li>
-                    <li><a href="./contact.html">CONTACT</a></li>
-                    </ul>
+      <li><a href="./index.html">HOME</a></li>
+      <li><a href="./men.html">MEN</a></li>
+      <li><a href="./women.html">WOMEN</a></li>
+      <li><a href="./about.html">ABOUT</a></li>
+      <li><a href="./contact.html">CONTACT</a></li>
+    </ul>
+  
     <hr>
     <a href="./login.html">Login</a>
     <a href="./register.html">Register</a>
   </div>
+    
   
   <div class="overlay" id="overlay"></div>
   
   <script>
+    
+    const mobileMenu = document.getElementById("mobileMenu");
+const overlay = document.getElementById("overlay");
+const header = document.getElementById("header");
+// MENU
+function toggleMenu(){
+  mobileMenu.classList.toggle("active");
+  overlay.classList.toggle("active");
+}
+
+overlay.onclick = () => {
+  mobileMenu.classList.remove("active");
+  overlay.classList.remove("active");
+};
+
+// SHRINK
+window.addEventListener("scroll", () => {
+  header.classList.toggle("shrink", window.scrollY > 50);
+});
+
+// DARK MODE
+function toggleTheme(){
+  document.body.classList.toggle("dark");
+
+  const icon = document.querySelector(".theme-toggle");
+  icon.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
+}
+
   // MENU
   function toggleMenu(){
     mobileMenu.classList.toggle("active");
@@ -272,6 +302,9 @@
     }
   }
   </script>
+
+
+
 
 
 
@@ -1069,199 +1102,7 @@ body{
   }
 }
   </style>
-  <!-- ----------- -->
-
-  <section class="category-section">
-    <h2 class="section-title">SHOP BY CATEGORY 🛍️</h2>
   
-    <div class="category-grid">
-  
-      <a href="men.html" class="category-card">
-        <img src="./men1.webp">
-        <div class="overlay">
-          <h3>Men</h3>
-          <button>Shop Now</button>
-        </div>
-      </a>
-  
-      <a href="women.html" class="category-card">
-        <img src="./2 (1).webp">
-        <div class="overlay">
-          <h3>Women</h3>
-          <button>Shop Now</button>
-        </div>
-      </a>
-  
-      <a href="error.html" class="category-card">
-        <img src="./shoe121.webp">
-        <div class="overlay">
-          <h3>Shoes</h3>
-          <button>Shop Now</button>
-        </div>
-      </a>
-  
-      <a href="error.html" class="category-card">
-        <img src="./acc.webp">
-        <div class="overlay">
-          <h3>Accessories</h3>
-          <button>Shop Now</button>
-        </div>
-      </a>
-  
-    </div>
-  </section>
-
-  <style>
-    /* SECTION */
-.category-section{
-  padding:70px 5%;
-  background:#0f0f0f;
-  text-align:center;
-  color:#fff;
-}
-
-.section-title{
-  font-size:2.3rem;
-  margin-bottom:45px;
-  letter-spacing:1px;
-}
-
-/* GRID */
-.category-grid{
-  display:grid;
-  grid-template-columns:repeat(4, 1fr);
-  gap:25px;
-}
-
-/* CARD */
-.category-card{
-  position:relative;
-  overflow:hidden;
-  border-radius:22px;
-  display:block;
-  height:260px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.4);
-  transition:0.4s ease;
-}
-
-/* IMAGE */
-.category-card img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transition:0.5s ease;
-}
-
-/* DARK GRADIENT OVERLAY */
-.overlay{
-  position:absolute;
-  inset:0;
-  background:linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.2));
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-  align-items:flex-start;
-  padding:20px;
-  gap:10px;
-}
-
-/* TEXT */
-.overlay h3{
-  font-size:1.4rem;
-  margin:0;
-}
-
-/* BUTTON */
-.overlay button{
-  padding:8px 15px;
-  border:none;
-  border-radius:20px;
-  background:#ff4d4d;
-  color:#fff;
-  font-size:0.85rem;
-  cursor:pointer;
-  transition:0.3s;
-}
-
-.overlay button:hover{
-  background:#fff;
-  color:#000;
-}
-
-/* HOVER EFFECTS */
-.category-card:hover img{
-  transform:scale(1.1);
-}
-
-.category-card:hover{
-  transform:translateY(-8px);
-  box-shadow:0 15px 35px rgba(255,77,77,0.3);
-}
-
-/* RESPONSIVE */
-
-/* Laptop */
-@media(max-width:1200px){
-  .category-grid{
-    grid-template-columns:repeat(3, 1fr);
-  }
-}
-
-/* Tablet */
-@media(max-width:768px){
-  .category-grid{
-    grid-template-columns:repeat(2, 1fr);
-  }
-
-  .category-card{
-    height:220px;
-  }
-}
-
-/* Mobile */
-@media(max-width:480px){
-  .category-grid{
-    grid-template-columns:1fr;
-  }
-
-  .category-card{
-    height:200px;
-  }
-
-  .section-title{
-    font-size:1.7rem;
-  }
-}
-
-.hidden{
-  opacity:0;
-  transform:translateY(40px);
-  transition:0.6s ease;
-}
-
-.show{
-  opacity:1;
-  transform:translateY(0);
-}
-  </style>
-
-  <script>
-    const cards = document.querySelectorAll(".category-card");
-
-const observer = new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add("show");
-    }
-  });
-}, { threshold: 0.2 });
-
-cards.forEach(card=>{
-  card.classList.add("hidden");
-  observer.observe(card);
-});
-  </script>
-
   <!-- ---------- -->
 
   <style>
@@ -1456,6 +1297,10 @@ body{
   }
 }
   </style>
+
+
+
+
 
 <section class="container">
     <div class="stats-grid">
