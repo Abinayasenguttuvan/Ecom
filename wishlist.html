@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wishlist | Stackly</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+/* ===== GLOBAL ===== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial;
+}
+
+body{
+  background:#0a0a0a;
+  color:#fff;
+}
+
+/* ===== TOP BAR ===== */
+.topbar{
+  position:fixed;
+  top:0;
+  width:100%;
+  height:70px;
+  background:#000;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 20px;
+  z-index:3000;
+}
+
+.left{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.hamburger{
+  cursor:pointer;
+  display:none;
+  font-size:18px;
+}
+
+.user-box{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.user-info p{
+  font-size:14px;
+  font-weight:600;
+}
+
+.user-info span{
+  font-size:11px;
+  color:#aaa;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar{
+  position:fixed;
+  top:70px;
+  left:0;
+  width:250px;
+  height:100%;
+  background:#111;
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  transition:0.3s;
+  z-index:2000;
+}
+
+.sidebar a{
+  text-decoration:none;
+  color:#aaa;
+  padding:12px;
+  border-radius:10px;
+  display:flex;
+  gap:10px;
+}
+
+.sidebar a:hover{
+  background:#222;
+  color:#1f7a5a;
+}
+
+.sidebar a.active{
+  background:#1f7a5a;
+  color:#fff;
+}
+
+.logout{
+  margin-top:auto;
+  background:#ff4d4d;
+  color:#fff;
+  border:none;
+  padding:12px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+/* ===== MAIN ===== */
+.main{
+  margin-left:250px;
+  padding:90px 20px;
+}
+
+/* ===== CARDS ===== */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin-bottom:20px;
+}
+
+.card{
+  background:#111;
+  padding:20px;
+  border-radius:15px;
+}
+
+/* ===== WISHLIST GRID ===== */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.wish-card{
+  background:#111;
+  padding:15px;
+  border-radius:15px;
+  text-align:center;
+}
+
+.wish-card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+.actions{
+  display:flex;
+  justify-content:space-between;
+  margin-top:10px;
+}
+
+.btn{
+  background:#1f7a5a;
+  color:#fff;
+  border:none;
+  padding:8px 12px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.remove{
+  background:#ff4d4d;
+  color:#fff;
+  border:none;
+  padding:8px 12px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+/* ===== RECENT ===== */
+.panel{
+  margin-top:20px;
+  background:#111;
+  padding:20px;
+  border-radius:15px;
+}
+
+.recent-item{
+  display:flex;
+  gap:10px;
+  padding:10px;
+  background:#0f0f0f;
+  margin-top:10px;
+  border-radius:10px;
+}
+
+/* ===== OVERLAY ===== */
+.overlay{
+  display:none;
+}
+
+/* ===== ANIMATION ===== */
+.reveal{
+  opacity:0;
+  transform:translateY(60px);
+  transition:0.8s ease;
+}
+
+.reveal.active{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media(max-width:1200px){
+  .cards{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:768px){
+
+  .hamburger{
+    display:block;
+  }
+
+  .sidebar{
+    transform:translateX(-100%);
+  }
+
+  .sidebar.active{
+    transform:translateX(0);
+  }
+
+  .main{
+    margin-left:0;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:480px){
+  .cards{
+    grid-template-columns:1fr;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ===== TOP BAR ===== -->
+<header class="topbar">
+
+  <div class="left">
+    <div class="hamburger" onclick="toggleSidebar()">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+    <h2>Stackly</h2>
+  </div>
+
+  <div class="user-box">
+    <div class="user-info">
+      <p id="userRole">User</p>
+      <span id="userEmail">user@mail.com</span>
+    </div>
+    <i class="fa-regular fa-circle-user"></i>
+  </div>
+
+</header>
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar" id="sidebar">
+
+    <a class="active" href="./users.html"><i class="fa fa-house"></i> Dashboard</a>
+    <a href="./orders.html"><i class="fa fa-bag-shopping"></i> Orders</a>
+    <a href="./wishlist.html"><i class="fa fa-heart"></i> Wishlist</a>
+    <a href="./login.html"><i class="fa fa-star"></i> Logout</a>
+    
+
+  <button class="logout" onclick="logoutUser()">Logout</button>
+
+</aside>
+
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+<!-- ===== MAIN ===== -->
+<main class="main">
+
+<h1>Wishlist ❤️</h1>
+
+<!-- ===== STATS ===== -->
+<div class="cards reveal">
+
+  <div class="card"><h2>18</h2><p>Saved Items</p></div>
+  <div class="card"><h2>5</h2><p>Categories</p></div>
+  <div class="card"><h2>3</h2><p>Trending</p></div>
+  <div class="card"><h2>92%</h2><p>Match Score</p></div>
+
+</div>
+
+<!-- ===== PRODUCTS ===== -->
+<div class="panel reveal">
+  <h3>Saved Products</h3>
+
+  <div class="grid">
+
+    <div class="wish-card">
+      <img src="./black kurthi.webp">
+      <h4>Bridal Wear</h4>
+      <p>₹1999</p>
+      <div class="actions">
+        <button class="btn">Add to Cart</button>
+        <button class="remove">Remove</button>
+      </div>
+    </div>
+
+    <div class="wish-card">
+      <img src="dress.webp">
+      <h4>Festive Dress</h4>
+      <p>₹1499</p>
+      <div class="actions">
+        <button class="btn">Add to Cart</button>
+        <button class="remove">Remove</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== RECENT ===== -->
+<div class="panel reveal">
+  <h3>Recently Added</h3>
+
+  <div class="recent-item">❤️ Added Saree</div>
+  <div class="recent-item">👗 Added Dress</div>
+  <div class="recent-item">👕 Added Hoodie</div>
+
+</div>
+
+</main>
+
+<script>
+
+/* SIDEBAR */
+function toggleSidebar(){
+  document.getElementById("sidebar").classList.toggle("active");
+}
+
+/* LOGOUT */
+function logoutUser(){
+  localStorage.clear();
+  window.location.href="login.html";
+}
+
+/* USER DATA */
+const user = JSON.parse(localStorage.getItem("userData"));
+
+if(user){
+  document.getElementById("userEmail").innerText = user.email;
+  document.getElementById("userRole").innerText = user.role || "User";
+}
+
+/* REMOVE ITEM */
+document.querySelectorAll(".remove").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    btn.closest(".wish-card").remove();
+  });
+});
+
+/* SCROLL ANIMATION */
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add("active");
+    }
+  });
+},{threshold:0.2});
+
+document.querySelectorAll(".reveal").forEach(el=>{
+  observer.observe(el);
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Users | Stackly Admin</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+/* ===== BASE ===== */
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
+body{background:#0a0a0a;color:#fff;}
+
+/* ===== TOPBAR ===== */
+.topbar{
+position:fixed;top:0;width:100%;height:70px;
+display:flex;justify-content:space-between;align-items:center;
+padding:0 20px;background:#000;
+border-bottom:1px solid rgba(255,0,0,0.2);
+z-index:2000;
+}
+
+.left{display:flex;align-items:center;gap:10px;}
+.hamburger{display:none;cursor:pointer;}
+
+.user-box{display:flex;gap:10px;align-items:center;}
+.user-box span{font-size:11px;color:#aaa;}
+
+/* ===== SIDEBAR ===== */
+.sidebar{
+position:fixed;top:70px;left:0;width:250px;height:100%;
+background:#0d0d0d;padding:20px;
+border-right:1px solid rgba(255,0,0,0.2);
+display:flex;flex-direction:column;
+}
+
+.sidebar a{
+text-decoration:none;
+color:#aaa;
+padding:12px;
+border-radius:8px;
+display:flex;
+gap:10px;
+}
+
+.sidebar a:hover{color:#ff2e2e;background:#111;}
+.sidebar a.active{background:#ff2e2e;color:#fff;}
+
+.logout{
+margin-top:auto;
+background:#ff2e2e;
+border:none;
+padding:12px;
+color:#fff;
+border-radius:8px;
+cursor:pointer;
+}
+
+/* ===== MAIN ===== */
+.main{
+margin-left:250px;
+padding:90px 20px;
+}
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+}
+
+.search input{
+padding:10px;
+width:250px;
+background:#111;
+border:none;
+color:#fff;
+border-radius:8px;
+}
+
+/* ===== TABLE ===== */
+.table{
+width:100%;
+border-collapse:collapse;
+min-width:600px;
+}
+
+.table th,.table td{
+padding:12px;
+border-bottom:1px solid rgba(255,255,255,0.05);
+text-align:left;
+}
+
+.status{
+padding:5px 10px;
+border-radius:6px;
+font-size:12px;
+}
+
+.active{background:#1f7a5a;}
+.blocked{background:#ff2e2e;}
+
+.btn{
+padding:6px 10px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+margin-right:5px;
+}
+
+.view{background:#1f7a5a;color:#fff;}
+.block{background:#ff2e2e;color:#fff;}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+
+.hamburger{display:block;}
+
+.sidebar{transform:translateX(-100%);transition:0.3s;}
+.sidebar.active{transform:translateX(0);}
+
+.main{margin-left:0;}
+
+.search input{width:100%;}
+
+.table-wrapper{overflow-x:auto;}
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="left">
+    <div class="hamburger" onclick="toggleSidebar()">
+      <i class="fa fa-bars"></i>
+    </div>
+    <h3>Users</h3>
+  </div>
+
+  <div class="user-box">
+    <span>ADMIN</span>
+    <span>admin@stackly.com</span>
+  </div>
+</div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+    <a href="admin.html"><i class="fa fa-house"></i> Dashboard</a>
+    <a href="./products.html"><i class="fa fa-box"></i> Products</a>
+    <a href="./user.html"><i class="fa fa-users"></i> Users</a>
+    <a href="./orders.html"><i class="fa fa-cart-shopping"></i> Orders</a>
+    <a href="./login.html"><i class="fa fa-cart-shopping"></i> Logout</a>
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+
+<div class="header">
+  <h2>Registered Users</h2>
+  <div class="search">
+    <input type="text" placeholder="Search users...">
+  </div>
+</div>
+
+<div class="table-wrapper">
+<table class="table">
+
+<tr>
+<th>Name</th>
+<th>Email</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+<tr>
+<td>Priya</td>
+<td>priya@gmail.com</td>
+<td><span class="status active">Active</span></td>
+<td>
+<button class="btn view" onclick="go404()">View</button>
+<button class="btn block" onclick="go404()">Block</button>
+</td>
+</tr>
+
+<tr>
+<td>Arjun</td>
+<td>arjun@gmail.com</td>
+<td><span class="status blocked">Blocked</span></td>
+<td>
+<button class="btn view" onclick="go404()">View</button>
+<button class="btn block" onclick="go404()">Block</button>
+</td>
+</tr>
+
+</table>
+</div>
+
+</div>
+
+<script>
+function toggleSidebar(){
+document.getElementById("sidebar").classList.toggle("active");
+}
+
+function go404(){
+window.location.href="ad_404.html";
+}
+</script>
+
+</body>
+</html>

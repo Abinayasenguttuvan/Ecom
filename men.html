@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stackly Ecommerce </title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+
+<!-- Swiper -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+<!-- Animate -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",sans-serif;}
+  
+  /* THEME VARIABLES */
+  :root{
+    --bg:#ffffff;
+    --text:#0f172a;
+    --glass:rgba(255,255,255,0.6);
+    --border:rgba(255,255,255,0.3);
+    --accent:red;
+  }
+  
+  body.dark{
+    --bg:#020617;
+    --text:#e2e8f0;
+    --glass:rgba(15,23,42,0.7);
+    --border:rgba(255,255,255,0.1);
+  }
+  
+  body{
+    background:var(--bg);
+    color:var(--text);
+    transition:0.3s;
+  }
+  
+  /* HEADER */
+  header{
+    position:fixed;
+    top:0;left:0;width:100%;
+    background:var(--glass);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+    box-shadow:0 8px 30px rgba(0,0,0,0.05);
+    z-index:1000;
+    transition:0.3s;
+  }
+  
+  /* SHRINK */
+  header.shrink{
+    padding:5px 0;
+    box-shadow:0 4px 15px rgba(0,0,0,0.08);
+  }
+  
+  .navbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 40px;
+    position:relative;
+  }
+  
+  /* LOGO */
+  .logo img{height:40px;}
+  
+  /* NAV */
+  .nav-links{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:30px;
+  }
+  
+  .nav-links a{
+    text-decoration:none;
+    color:var(--text);
+    font-weight:500;
+    position:relative;
+  }
+  
+  .nav-links a:hover,
+  .nav-links a.active{
+    color:var(--accent);
+  }
+  
+  .nav-links a:hover::after,
+  .nav-links a.active::after{
+    content:"";
+    position:absolute;
+    bottom:-6px;
+    left:0;
+    width:100%;
+    height:2px;
+    background:var(--accent);
+  }
+  
+  /* RIGHT */
+  .right{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  
+  .btn{
+    padding:8px 18px;
+    border-radius:30px;
+    border:none;
+    cursor:pointer;
+    font-size:14px;
+    transition:0.3s;
+  }
+  
+  .login{
+    background:transparent;
+    border:1px solid var(--accent);
+    color:var(--accent);
+  }
+  
+  .login:hover{
+    background:var(--accent);
+    color:black;
+  }
+  
+  .register{
+    background:var(--accent);
+    color:black;
+  }
+  
+  /* DARK MODE BUTTON */
+  .theme-toggle{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+   
+    color:black;
+    font-size:16px;
+  }
+  
+  /* MENU */
+  .menu-toggle{
+    display:none;
+    font-size:22px;
+    cursor:pointer;
+  }
+  
+  /* MOBILE MENU */
+  .mobile-menu{
+    position:fixed;
+    top:0;left:-100%;
+    width:260px;height:100vh;
+    background:var(--bg);
+    padding:20px;
+    transition:0.3s;
+    z-index:2000;
+  }
+  
+  .mobile-menu.active{left:0;}
+  
+  .mobile-menu a{
+    display:block;
+    margin:15px 0;
+    text-decoration:none;
+    color:var(--text);
+  }
+  
+  /* OVERLAY */
+  .overlay{
+    position:fixed;
+    top:0;left:0;
+    width:100%;height:100%;
+    background:rgba(0,0,0,0.4);
+    display:none;
+    z-index:1500;
+  }
+  
+  .overlay.active{display:block;}
+  
+  /* RESPONSIVE */
+  @media(max-width:900px){
+    .nav-links{display:none;}
+    .right{display:none;}
+    .menu-toggle{display:block;}
+  }
+  
+  @media(max-width:576px){
+    .navbar{padding:15px;}
+  }
+  </style>
+  
+  <header id="header">
+    <div class="navbar">
+  
+      <div class="menu-toggle" onclick="toggleMenu()">
+        ☰
+      </div>
+  
+      <div class="logo">
+        <a href="./index.html">
+          <img src="./logo.webp" alt="Stackly">
+        </a>
+      </div>
+  
+      <div class="nav-links">
+        <a href="./index.html">HOME</a>
+        <a href="./men.html">MEN</a>
+           <a href="./women.html">WOMEN</a>
+                <a href="./about.html">ABOUT</a>
+                    <a href="./contact.html">CONTACT</a>
+      </div>
+  
+      <div class="right">
+        <div class="theme-toggle" onclick="toggleTheme()">🌙</div>
+        <button class="btn login" onclick="location.href='./login.html'">Login</button>
+        <button class="btn register" onclick="location.href='./register.html'">Register</button>
+      </div>
+  
+    </div>
+  </header>
+  
+  <div class="mobile-menu" id="mobileMenu">
+    <li><a href="./index.html">HOME</a></li>
+        <li><a href="./men.html">MEN</a></li>
+            <li><a href="./women.html">WOMEN</a></li>
+                <li><a href="./about.html">ABOUT</a></li>
+                    <li><a href="./contact.html">CONTACT</a></li>
+    <hr>
+    <a href="./login.html">Login</a>
+    <a href="./register.html">Register</a>
+  </div>
+  
+  <div class="overlay" id="overlay"></div>
+  
+  <script>
+  // MENU
+  function toggleMenu(){
+    mobileMenu.classList.toggle("active");
+    overlay.classList.toggle("active");
+  }
+  
+  overlay.onclick=()=>{
+    mobileMenu.classList.remove("active");
+    overlay.classList.remove("active");
+  };
+  
+  // SHRINK
+  window.addEventListener("scroll",()=>{
+    header.classList.toggle("shrink",window.scrollY>50);
+  });
+  
+  // DARK MODE
+  function toggleTheme(){
+    document.body.classList.toggle("dark");
+  
+    const icon = document.querySelector(".theme-toggle");
+    if(document.body.classList.contains("dark")){
+      icon.textContent="☀️";
+    }else{
+      icon.textContent="🌙";
+    }
+  }
+  </script>
+
+<section class="men-page">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <h3>Filter</h3>
+  
+      <div class="filter-box">
+        <h4>Category</h4>
+        <label><input type="checkbox" value="shirt" class="filter"> Shirts</label>
+        <label><input type="checkbox" value="hoodie" class="filter"> Hoodies</label>
+        <label><input type="checkbox" value="kurta" class="filter"> Kurtas</label>
+        <label><input type="checkbox" value="jacket" class="filter"> Jackets</label>
+      </div>
+  
+      <div class="filter-box">
+        <h4>Price</h4>
+        <select id="priceFilter">
+          <option value="all">All</option>
+          <option value="low">Below ₹800</option>
+          <option value="mid">₹800 - ₹1200</option>
+          <option value="high">Above ₹1200</option>
+        </select>
+      </div>
+  
+      <button onclick="resetFilter()">Reset</button>
+    </aside>
+  
+    <!-- PRODUCTS -->
+    <div class="product-area">
+  
+      <h2 class="title">MEN COLLECTIONS</h2>
+  
+      <div class="product-grid">
+  
+        <!-- STREETWEAR -->
+        <div class="product-card reveal" data-category="hoodie" data-price="700">
+          <img src="./hoodiee.webp">
+          <h4>Street Hoodie</h4>
+          <p>₹700</p>
+          <a href="/404.html" class="btn">Add to Cart</a>
+        </div>
+  
+        <div class="product-card reveal" data-category="shirt" data-price="900">
+          <img src="./shirt11.webp">
+          <h4>Urban Shirt</h4>
+          <p>₹900</p>
+          <a href="/404.html" class="btn">Add to Cart</a>
+        </div>
+  
+        <!-- FORMAL -->
+        <div class="product-card reveal" data-category="shirt" data-price="1100">
+          <img src="./men1.webp">
+          <h4>Formal Shirt</h4>
+          <p>₹1100</p>
+          <a href="/404.html" class="btn">Add to Cart</a>
+        </div>
+  
+        <div class="product-card reveal" data-category="jacket" data-price="1500">
+          <img src="./jacket.webp">
+          <h4>Premium Jacket</h4>
+          <p>₹1500</p>
+          <a href="/404.html" class="btn">Add to Cart</a>
+        </div>
+  
+        <!-- TRADITIONAL -->
+        <div class="product-card reveal" data-category="kurta" data-price="1000">
+          <img src="./black.webp">
+          <h4>Black Kurta</h4>
+          <p>₹1000</p>
+          <a href="/404.html" class="btn">Add to Cart</a>
+        </div>
+  
+        
+        <!-- TRENDING -->
+        <div class="product-card reveal" data-category="shirt" data-price="800">
+          <img src="./shirt11.webp">
+          <h4>Trend Shirt</h4>
+          <p>₹800</p>
+          <a href="/404.html" class="btn">Add to Cart</a>
+        </div>
+  
+        <div class="product-card reveal" data-category="jacket" data-price="1800">
+          <img src="rcb.webp">
+          <h4>Sports Jacket</h4>
+          <p>₹1800</p>
+          <a href="./404.html" class="btn">Add to Cart</a>
+        </div>
+  
+      </div>
+  
+    </div>
+  
+  </section>
+
+  <style>
+    body{
+  margin:0;
+  padding-top: 70px;
+  font-family:'Poppins',sans-serif;
+  background:#0f0f0f;
+  color:#fff;
+}
+
+/* LAYOUT */
+.men-page{
+  display:flex;
+  gap:20px;
+  padding:40px;
+}
+
+/* SIDEBAR */
+.sidebar{
+  width:250px;
+  background:#111;
+  padding:20px;
+  border-radius:15px;
+  position:sticky;
+  top:20px;
+  height:fit-content;
+}
+
+/* GRID */
+.product-area{
+  flex:1;
+}
+
+.title{
+  font-size:2rem;
+  margin-bottom:20px;
+}
+
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+/* CARD */
+.product-card{
+  background:#1a1a1a;
+  padding:15px;
+  border-radius:15px;
+  text-align:center;
+  transition:0.4s;
+}
+
+.product-card img{
+  width:100%;
+  height:170px;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+.product-card:hover{
+  transform:translateY(-8px);
+}
+
+.btn{
+  display:inline-block;
+  margin-top:10px;
+  padding:10px 15px;
+  background:#ff4d4d;
+  color:#fff;
+  border-radius:20px;
+  text-decoration:none;
+}
+
+/* ======================
+   SCROLL ANIMATION
+====================== */
+
+.reveal{
+  opacity:0;
+  transform:translateY(60px);
+  transition:0.8s ease;
+}
+
+.reveal.active{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* RESPONSIVE */
+
+/* Laptop */
+@media(max-width:1200px){
+  .product-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+/* Tablet */
+@media(max-width:768px){
+  .men-page{
+    flex-direction:column;
+  }
+
+  .sidebar{
+    width:100%;
+    position:relative;
+  }
+
+  .product-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+/* Mobile */
+@media(max-width:480px){
+  .product-grid{
+    grid-template-columns:1fr;
+  }
+
+  .product-card img{
+    height:150px;
+  }
+}
+  </style>
+
+  <script>
+    /* FILTER SYSTEM */
+const products = document.querySelectorAll(".product-card");
+const filters = document.querySelectorAll(".filter");
+const priceFilter = document.getElementById("priceFilter");
+
+function filterProducts(){
+
+  let selected = [...filters]
+    .filter(f => f.checked)
+    .map(f => f.value);
+
+  let priceValue = priceFilter.value;
+
+  products.forEach(p => {
+
+    let cat = p.dataset.category;
+    let price = parseInt(p.dataset.price);
+
+    let matchCat =
+      selected.length === 0 ||
+      selected.includes(cat);
+
+    let matchPrice =
+      priceValue === "all" ||
+      (priceValue === "low" && price < 800) ||
+      (priceValue === "mid" && price >= 800 && price <= 1200) ||
+      (priceValue === "high" && price > 1200);
+
+    p.style.display = (matchCat && matchPrice) ? "block" : "none";
+  });
+}
+
+filters.forEach(f => f.addEventListener("change", filterProducts));
+priceFilter.addEventListener("change", filterProducts);
+
+function resetFilter(){
+  filters.forEach(f => f.checked = false);
+  priceFilter.value = "all";
+  filterProducts();
+}
+
+/* =========================
+   SCROLL REVEAL ANIMATION
+========================= */
+
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("active");
+    }
+  });
+},{threshold:0.2});
+
+document.querySelectorAll(".reveal").forEach(el=>{
+  observer.observe(el);
+});
+  </script>
+  

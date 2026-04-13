@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stackly Ecommerce </title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+
+<!-- Swiper -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+<!-- Animate -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",sans-serif;}
+  
+  /* THEME VARIABLES */
+  :root{
+    --bg:#ffffff;
+    --text:#0f172a;
+    --glass:rgba(255,255,255,0.6);
+    --border:rgba(255,255,255,0.3);
+    --accent:red;
+  }
+  
+  body.dark{
+    --bg:#020617;
+    --text:#e2e8f0;
+    --glass:rgba(15,23,42,0.7);
+    --border:rgba(255,255,255,0.1);
+  }
+  
+  body{
+    background:var(--bg);
+    color:var(--text);
+    transition:0.3s;
+  }
+  
+  /* HEADER */
+  header{
+    position:fixed;
+    top:0;left:0;width:100%;
+    background:var(--glass);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+    box-shadow:0 8px 30px rgba(0,0,0,0.05);
+    z-index:1000;
+    transition:0.3s;
+  }
+  
+  /* SHRINK */
+  header.shrink{
+    padding:5px 0;
+    box-shadow:0 4px 15px rgba(0,0,0,0.08);
+  }
+  
+  .navbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 40px;
+    position:relative;
+  }
+  
+  /* LOGO */
+  .logo img{height:40px;}
+  
+  /* NAV */
+  .nav-links{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:30px;
+  }
+  
+  .nav-links a{
+    text-decoration:none;
+    color:var(--text);
+    font-weight:500;
+    position:relative;
+  }
+  
+  .nav-links a:hover,
+  .nav-links a.active{
+    color:var(--accent);
+  }
+  
+  .nav-links a:hover::after,
+  .nav-links a.active::after{
+    content:"";
+    position:absolute;
+    bottom:-6px;
+    left:0;
+    width:100%;
+    height:2px;
+    background:var(--accent);
+  }
+  
+  /* RIGHT */
+  .right{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  
+  .btn{
+    padding:8px 18px;
+    border-radius:30px;
+    border:none;
+    cursor:pointer;
+    font-size:14px;
+    transition:0.3s;
+  }
+  
+  .login{
+    background:transparent;
+    border:1px solid var(--accent);
+    color:var(--accent);
+  }
+  
+  .login:hover{
+    background:var(--accent);
+    color:black;
+  }
+  
+  .register{
+    background:var(--accent);
+    color:black;
+  }
+  
+  /* DARK MODE BUTTON */
+  .theme-toggle{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+   
+    color:black;
+    font-size:16px;
+  }
+  
+  /* MENU */
+  .menu-toggle{
+    display:none;
+    font-size:22px;
+    cursor:pointer;
+  }
+  
+  /* MOBILE MENU */
+  .mobile-menu{
+    position:fixed;
+    top:0;left:-100%;
+    width:260px;height:100vh;
+    background:var(--bg);
+    padding:20px;
+    transition:0.3s;
+    z-index:2000;
+  }
+  
+  .mobile-menu.active{left:0;}
+  
+  .mobile-menu a{
+    display:block;
+    margin:15px 0;
+    text-decoration:none;
+    color:var(--text);
+  }
+  
+  /* OVERLAY */
+  .overlay{
+    position:fixed;
+    top:0;left:0;
+    width:100%;height:100%;
+    background:rgba(0,0,0,0.4);
+    display:none;
+    z-index:1500;
+  }
+  
+  .overlay.active{display:block;}
+  
+  /* RESPONSIVE */
+  @media(max-width:900px){
+    .nav-links{display:none;}
+    .right{display:none;}
+    .menu-toggle{display:block;}
+  }
+  
+  @media(max-width:576px){
+    .navbar{padding:15px;}
+  }
+  </style>
+  
+  <header id="header">
+    <div class="navbar">
+  
+      <div class="menu-toggle" onclick="toggleMenu()">
+        ☰
+      </div>
+  
+      <div class="logo">
+        <a href="./index.html">
+          <img src="./logo.webp" alt="Stackly">
+        </a>
+      </div>
+  
+      <div class="nav-links">
+        <a href="./index.html">HOME</a>
+        <a href="./men.html">MEN</a>
+           <a href="./women.html">WOMEN</a>
+                <a href="./about.html">ABOUT</a>
+                    <a href="./contact.html">CONTACT</a>
+      </div>
+  
+      <div class="right">
+        <div class="theme-toggle" onclick="toggleTheme()">🌙</div>
+        <button class="btn login" onclick="location.href='./login.html'">Login</button>
+        <button class="btn register" onclick="location.href='./register.html'">Register</button>
+      </div>
+  
+    </div>
+  </header>
+  
+  <div class="mobile-menu" id="mobileMenu">
+    <li><a href="./index.html">HOME</a></li>
+        <li><a href="./men.html">MEN</a></li>
+            <li><a href="./women.html">WOMEN</a></li>
+                <li><a href="./about.html">ABOUT</a></li>
+                    <li><a href="./contact.html">CONTACT</a></li>
+    <hr>
+    <a href="./login.html">Login</a>
+    <a href="./register.html">Register</a>
+  </div>
+  
+  <div class="overlay" id="overlay"></div>
+  
+  <script>
+  // MENU
+  function toggleMenu(){
+    mobileMenu.classList.toggle("active");
+    overlay.classList.toggle("active");
+  }
+  
+  overlay.onclick=()=>{
+    mobileMenu.classList.remove("active");
+    overlay.classList.remove("active");
+  };
+  
+  // SHRINK
+  window.addEventListener("scroll",()=>{
+    header.classList.toggle("shrink",window.scrollY>50);
+  });
+  
+  // DARK MODE
+  function toggleTheme(){
+    document.body.classList.toggle("dark");
+  
+    const icon = document.querySelector(".theme-toggle");
+    if(document.body.classList.contains("dark")){
+      icon.textContent="☀️";
+    }else{
+      icon.textContent="🌙";
+    }
+  }
+  </script>
+
+<!-- ===== ABOUT SECTION ===== -->
+<section class="about-section reveal">
+
+    <div class="about-grid">
+  
+      <div class="about-img">
+        <img src="./men1.webp">
+      </div>
+  
+      <div class="about-text">
+        <p class="tag">Who We Are</p>
+  
+        <h2>
+          Stackly Ecommrce <br>
+          Through Modern Fashion
+        </h2>
+  
+        <p>
+          Premium stackly fashion offering curated collections blending modern trends with elegance.
+        </p>
+  
+        <ul>
+          <li>✔ Designer Collections</li>
+          <li>✔ Custom Tailoring</li>
+          <li>✔ Premium Fabrics</li>
+          <li>✔ Exclusive Designs</li>
+        </ul>
+  
+        <a href="404.html" class="btn">Learn More ↗</a>
+      </div>
+  
+    </div>
+  
+  </section>
+  
+  <!-- ===== BENEFITS ===== -->
+  <section class="benefits-section reveal">
+  
+    <div class="benefits-grid">
+  
+      <div class="benefits-text">
+        <p class="tag">Key Benefits</p>
+  
+        <h2>Why Choose Our Boutique</h2>
+  
+        <p>Premium fashion with craftsmanship and unique styling experience.</p>
+  
+        <div class="benefit-items">
+  
+          <div class="item">✔ Trendy Designs</div>
+          <div class="item">✔ Exclusive Collections</div>
+          <div class="item">✔ Personal Styling</div>
+          <div class="item">✔ Premium Quality</div>
+  
+        </div>
+  
+        <a href="404.html" class="btn">Read More ↗</a>
+      </div>
+  
+      <div class="benefits-img">
+        <img src="./dress.webp">
+      </div>
+  
+    </div>
+  
+  </section>
+  
+  <!-- ===== PRICING ===== -->
+  <section class="pricing-section reveal">
+  
+    <p class="tag center">Choose Your Plan</p>
+    <h2 class="center-title">Fashion Plans For Every Style</h2>
+  
+    <div class="pricing-grid">
+  
+      <div class="price-card">
+        <h3>Starter Plan</h3>
+        <ul>
+          <li>✔ 2 Outfits</li>
+          <li>✔ Basic Customization</li>
+          <li>✔ Email Support</li>
+        </ul>
+        <div class="price">₹4,999</div>
+        <a href="404.html">Subscribe</a>
+      </div>
+  
+      <div class="price-card featured">
+        <h3>Growth Plan</h3>
+        <ul>
+          <li>✔ 5 Outfits</li>
+          <li>✔ Tailoring</li>
+          <li>✔ Priority Support</li>
+        </ul>
+        <div class="price">₹9,999</div>
+        <a href="404.html">Subscribe</a>
+      </div>
+  
+      <div class="price-card">
+        <h3>Enterprise Plan</h3>
+        <ul>
+          <li>✔ Unlimited Designs</li>
+          <li>✔ Personal Stylist</li>
+          <li>✔ VIP Support</li>
+        </ul>
+        <div class="price">₹19,999</div>
+        <a href="404.html">Subscribe</a>
+      </div>
+  
+    </div>
+  
+  </section>
+
+  <style>
+
+/* GLOBAL */
+body{
+  margin:0;
+  font-family:Poppins, sans-serif;
+  background:#0f0f0f;
+  color:#fff;
+}
+
+img{
+  max-width:100%;
+  display:block;
+}
+
+/* ================= ABOUT ================= */
+
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:50px;
+  align-items:center;
+  padding:80px 8%;
+}
+
+.about-text h2{
+  font-size:2.3rem;
+  margin:15px 0;
+}
+
+.about-text ul{
+  padding:0;
+  list-style:none;
+  margin:20px 0;
+}
+
+.about-text li{
+  margin:8px 0;
+  color:#ccc;
+}
+
+.tag{
+  color:#ff4d4d;
+  font-size:12px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+}
+
+.btn{
+  display:inline-block;
+  padding:10px 18px;
+  background:#ff4d4d;
+  border-radius:25px;
+  color:#fff;
+  text-decoration:none;
+  margin-top:10px;
+}
+
+/* ================= BENEFITS ================= */
+
+.benefits-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:50px;
+  padding:80px 8%;
+}
+
+.benefit-items{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin:20px 0;
+}
+
+.item{
+  background:#1a1a1a;
+  padding:10px;
+  border-radius:10px;
+}
+
+/* ================= PRICING ================= */
+
+.center{
+  text-align:center;
+}
+
+.center-title{
+  text-align:center;
+  margin-bottom:40px;
+}
+
+.pricing-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:25px;
+  padding:40px 8%;
+}
+
+.price-card{
+  background:#1a1a1a;
+  padding:25px;
+  border-radius:15px;
+  text-align:center;
+  transition:0.4s;
+}
+
+.price-card:hover{
+  transform:translateY(-10px);
+}
+
+.price-card ul{
+  list-style:none;
+  padding:0;
+  margin:15px 0;
+  color:#ccc;
+}
+
+.price{
+  font-size:1.5rem;
+  margin:15px 0;
+}
+
+.price-card a{
+  display:inline-block;
+  padding:10px 15px;
+  background:#ff4d4d;
+  color:#fff;
+  border-radius:20px;
+  text-decoration:none;
+}
+
+/* FEATURED */
+.featured{
+  border:2px solid #ff4d4d;
+  transform:scale(1.05);
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* Laptop */
+@media(max-width:1200px){
+  .pricing-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+/* Tablet */
+@media(max-width:768px){
+  .about-grid,
+  .benefits-grid{
+    grid-template-columns:1fr;
+  }
+
+  .pricing-grid{
+    grid-template-columns:1fr;
+  }
+
+  .featured{
+    transform:none;
+  }
+}
+
+/* Mobile */
+@media(max-width:480px){
+  .about-text h2{
+    font-size:1.6rem;
+  }
+
+  .benefit-items{
+    grid-template-columns:1fr;
+  }
+}
+
+/* ================= ANIMATION ================= */
+
+.reveal{
+  opacity:0;
+  transform:translateY(60px);
+  transition:0.8s ease;
+}
+
+.reveal.active{
+  opacity:1;
+  transform:translateY(0);
+}
+  </style>
+
+<script>
+/* SCROLL REVEAL ANIMATION */
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("active");
+    }
+  });
+},{threshold:0.2});
+
+document.querySelectorAll(".reveal").forEach(el=>{
+  observer.observe(el);
+});
+</script>
+<style>
+    /* =========================
+   GLOBAL SECTION STYLES
+========================= */
+
+body{
+  margin:0;
+  padding-top: 50px;
+  font-family: 'Poppins', sans-serif;
+  background:#050505;
+  color:#fff;
+}
+
+/* Utility */
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:0 20px;
+}
+
+/* =========================
+   STATS SECTION
+========================= */
+
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+  text-align:center;
+  padding:60px 0;
+}
+
+.stats-grid h3{
+  font-size:2.5rem;
+  font-weight:800;
+}
+
+.stats-grid p{
+  font-size:0.75rem;
+  color:#aaa;
+  text-transform:uppercase;
+  letter-spacing:2px;
+}
+
+/* =========================
+   QUOTE SECTION
+========================= */
+
+.quote-section{
+  position:relative;
+  padding:100px 20px;
+  text-align:center;
+  overflow:hidden;
+  background:rgba(168, 21, 21, 0.05);
+}
+
+.quote-glow{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:300px;
+  height:300px;
+  background:red;
+  opacity:0.15;
+  filter:blur(120px);
+  border-radius:50%;
+}
+
+.quote-section h2{
+  font-size:2.2rem;
+  font-weight:800;
+  font-style:italic;
+  max-width:800px;
+  margin:auto;
+}
+
+/* =========================
+   TEAM SECTION
+========================= */
+
+.team-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:25px;
+}
+
+.team-card{
+  background:#0b0b0b;
+  border:1px solid rgba(168, 21, 21, 0.05);
+  padding:30px;
+  border-radius:18px;
+  transition:0.3s;
+  text-align:center;
+}
+
+.team-card:hover{
+  transform:translateY(-8px);
+  border-color: red;;
+}
+
+.team-card img{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  object-fit:cover;
+  margin-bottom:15px;
+}
+
+/* =========================
+   TESTIMONIAL SECTION
+========================= */
+
+.testimonial-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:25px;
+}
+
+.testimonial-card{
+  background:rgba(155, 63, 63, 0.05);
+  backdrop-filter:blur(10px);
+  padding:25px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,0.08);
+  transition:0.3s;
+}
+
+.testimonial-card:hover{
+  transform:translateY(-6px);
+  border-color:red;
+}
+
+.testimonial-card img{
+  width:45px;
+  height:45px;
+  border-radius:50%;
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+/* Laptop */
+@media(max-width:1200px){
+  .stats-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .team-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .testimonial-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+/* Tablet */
+@media(max-width:768px){
+  .stats-grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+  }
+
+  .team-grid{
+    grid-template-columns:1fr;
+  }
+
+  .testimonial-grid{
+    grid-template-columns:1fr;
+  }
+
+  .quote-section h2{
+    font-size:1.6rem;
+  }
+}
+
+/* Mobile */
+@media(max-width:480px){
+  .stats-grid{
+    grid-template-columns:1fr;
+  }
+
+  .stats-grid h3{
+    font-size:2rem;
+  }
+
+  .quote-section{
+    padding:70px 15px;
+  }
+}
+  </style>
+
+<section class="container">
+    <div class="stats-grid">
+      <div>
+        <h3>100%</h3>
+        <p>Craftsmanship</p>
+      </div>
+      <div>
+        <h3>24/7</h3>
+        <p>Styling Support</p>
+      </div>
+      <div>
+        <h3>4.9/5</h3>
+        <p>Customer Satisfaction</p>
+      </div>
+      <div>
+        <h3>10+</h3>
+        <p>Fashion Partners</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="quote-section">
+    <div class="quote-glow"></div>
+  
+    <h2>
+      "To inspire confidence and elegance by delivering premium fashion experiences."
+    </h2>
+  
+    <p style="margin-top:20px;color:#aaa;letter-spacing:3px;font-size:12px;">
+      OUR FASHION PHILOSOPHY
+    </p>
+  </section>
+
+  <section class="container" style="padding:80px 0;">
+    <h2 style="text-align:center;margin-bottom:40px;">Meet The Team</h2>
+  
+    <div class="team-grid">
+  
+      <div class="team-card">
+        <img src="./nithiya.webp">
+        <h3>Priya Sharma</h3>
+        <p>Founder & Designer</p>
+      </div>
+  
+      <div class="team-card">
+        <img src="./arjun.webp">
+        <h3>Arjun Rampal</h3>
+        <p>Style Consultant</p>
+      </div>
+  
+      <div class="team-card">
+        <img src="./sana.webp">
+        <h3>Preethi Verma</h3>
+        <p>Creative Director</p>
+      </div>
+  
+    </div>
+  </section>
+
+  <section class="container" style="padding:80px 0;">
+
+    <h2 style="text-align:center;margin-bottom:40px;">What Customers Say</h2>
+  
+    <div class="testimonial-grid">
+  
+      <div class="testimonial-card">
+        <p>“Amazing quality and premium designs!”</p>
+        <div style="display:flex;gap:10px;align-items:center;margin-top:15px;">
+          <img src="./sana.webp">
+          <div>
+            <h4>Ramya</h4>
+            <small>Customer</small>
+          </div>
+        </div>
+      </div>
+  
+      <div class="testimonial-card">
+        <p>“Loved the fit and styling support.”</p>
+        <div style="display:flex;gap:10px;align-items:center;margin-top:15px;">
+          <img src="./nithiya.webp">
+          <div>
+            <h4>Sneha Reddy</h4>
+            <small>Fashion Lover</small>
+          </div>
+        </div>
+      </div>
+  
+      <div class="testimonial-card">
+        <p>“Premium experience from start to finish.”</p>
+        <div style="display:flex;gap:10px;align-items:center;margin-top:15px;">
+          <img src="./arjun.webp">
+          <div>
+            <h4>Arvind Patel</h4>
+            <small>Loyal Client</small>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+<footer class="bio-footer">
+
+    <div class="footer-container">
+  
+      <!-- LOGO + ABOUT -->
+  <div class="footer-col">
+    <img src="./logo.webp" class="footer-logo">
+  
+    <p>
+      Ecommerce is a Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti ipsum exercitationem impedit.
+       Ab, eveniet nisi tempora consectetur voluptatum natus quaerat voluptas quibusdam minima hic voluptates!
+    </p>
+  
+    <!-- FOLLOW US -->
+    <h4 class="follow-title">Follow Us</h4>
+  
+    <div class="social-icons">
+      <a href="404.html"><i class="ri-facebook-fill"></i></a>
+      <a href="404.html"><i class="ri-twitter-x-line"></i></a>
+      <a href="404.html"><i class="ri-instagram-line"></i></a>
+      <a href="404.html"><i class="ri-linkedin-fill"></i></a>
+     
+    </div>
+  </div>
+  
+      <!-- QUICK LINKS -->
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+            
+      <li><a href="./index.html">HOME</a></li>
+        <li><a href="./men.html">MEN</a></li>
+            <li><a href="./women.html">WOMEN</a></li>
+                <li><a href="./about.html">ABOUT</a></li>
+                    <li><a href="./contact.html">CONTACT</a></li>
+        </ul>
+      </div>
+  
+      <!-- LAB SERVICES -->
+      <div class="footer-col">
+        <h4>ECommerce Services</h4>
+        <ul>
+            <li><a href="404.html">24/7 delivery</a></li>
+            <li><a href="404.html">Trendy collections</a></li>
+            <li><a href="404.html">Offer collection</a></li>
+            
+        </ul>
+      </div>
+  
+      <!-- LOCATION -->
+      <div class="footer-col">
+        <h4>Location</h4>
+        <div class="map">
+          <iframe src="https://www.google.com/maps?q=Salem%20Tamil%20Nadu&output=embed"></iframe>
+        </div>
+      </div>
+  
+      <!-- SUBSCRIBE -->
+      <div class="footer-col">
+        <h4>Research Updates</h4>
+  
+        <div class="subscribe">
+          <input type="email" id="email" placeholder="Enter Email">
+          <button onclick="subscribe()">Subscribe</button>
+        </div>
+  
+        <span id="msg"></span>
+      </div>
+  
+    </div>
+  
+    <!-- BOTTOM -->
+    <div class="footer-bottom">
+      <p>
+        © 2026 BioGen | All Rights Reserved |
+        <a href="404.html">Privacy Policy</a> |
+        <a href="404.html">Terms & Conditions</a>
+      </p>
+    </div>
+  
+  </footer>
+  
+  <style>
+    /* FOLLOW TITLE */
+  .follow-title {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #5f5cff;
+  }
+  
+  /* SOCIAL ICONS */
+  .social-icons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  
+  /* ICON STYLE */
+  .social-icons a {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+    font-size: 18px;
+    color: #fff;
+    transition: 0.3s ease;
+  }
+  
+  /* HOVER EFFECT (BIO GLOW) */
+  .social-icons a:hover {
+    /* background: #00f7ff; */
+    color: #000;
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 0 15px #5f5cff;
+  }
+  
+  /* MOBILE CENTER ALIGN */
+  @media (max-width: 480px) {
+    .social-icons {
+      justify-content: center;
+    }
+  
+    .follow-title {
+      text-align: center;
+    }
+  }
+    /* PRE FOOTER */
+  .pre-footer {
+    background: #0a0f1a;
+    padding: 40px 20px;
+  }
+  
+  .pre-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .pre-box {
+    flex: 1;
+    min-width: 250px;
+    text-align: center;
+    color: #fff;
+  }
+  
+  .pre-box i {
+    font-size: 30px;
+    color: red;
+    margin-bottom: 10px;
+  }
+  
+  /* FOOTER */
+  .bio-footer {
+    background: #05070d;
+    color: #fff;
+    padding: 60px 20px;
+  }
+  
+  .footer-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 30px;
+  }
+  
+  /* LOGO */
+  .footer-logo {
+    width: 140px;
+    margin-bottom: 10px;
+  }
+  
+  /* TEXT */
+  .footer-col p {
+    font-size: 14px;
+    color: #aaa;
+  }
+  
+  /* LINKS */
+  .footer-col h4 {
+    margin-bottom: 15px;
+    color: red;
+  }
+  
+  .footer-col ul {
+    list-style: none;
+  }
+  
+  .footer-col ul li {
+    margin-bottom: 10px;
+  }
+  
+  .footer-col ul li a {
+    color: #aaa;
+    text-decoration: none;
+  }
+  
+  .footer-col ul li a:hover {
+    color: red;
+  }
+  
+  /* SOCIAL */
+  .social-icons a {
+    margin-right: 10px;
+    font-size: 20px;
+    color: #fff;
+  }
+  
+  .social-icons a:hover {
+    color: red;
+  }
+  
+  /* MAP */
+  .map iframe {
+    width: 100%;
+    height: 180px;
+    border: 0;
+    border-radius: 10px;
+  }
+  
+  /* SUBSCRIBE */
+  .subscribe {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .subscribe input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+  }
+  
+  .subscribe button {
+    padding: 10px;
+    background: red;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* MESSAGE */
+  #msg {
+    display: block;
+    margin-top: 8px;
+    font-size: 13px;
+  }
+  
+  /* BOTTOM */
+  .footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    border-top: 1px solid #222;
+    padding-top: 15px;
+    font-size: 14px;
+  }
+  
+  .footer-bottom a {
+    color: red;
+    text-decoration: none;
+  }
+  
+  /* ================= RESPONSIVE ================= */
+  
+  /* TABLET */
+  @media (max-width: 1024px) {
+    .footer-container {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .footer-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .subscribe {
+      flex-direction: column;
+    }
+  }
+  
+  /* SMALL MOBILE */
+  @media (max-width: 480px) {
+    .footer-container {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+  
+    .social-icons {
+      margin-top: 10px;
+    }
+  }
+    </style>
+  
+  <script>
+    function subscribe() {
+      let email = document.getElementById("email").value;
+      let msg = document.getElementById("msg");
+    
+      let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    
+      if (email === "" || !email.match(pattern)) {
+        msg.style.color = "red";
+        msg.innerText = "Please fill correct mail id";
+        return;
+      }
+    
+      setTimeout(() => {
+      window.location.href = "404.html";
+    });
+    }
+    </script>
+    </body>
+</html>
+    
+</body>
+</html>
+    

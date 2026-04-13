@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard | Stackly</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+/* ===== GLOBAL ===== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Plus Jakarta Sans', sans-serif;
+}
+
+body{
+  background:#0a0a0a;
+  color:#fff;
+}
+
+/* ===== THEME COLOR ===== */
+:root{
+  --primary:#ff2e2e;
+  --dark:#0a0a0a;
+  --card:#111;
+}
+
+/* ===== TOP BAR ===== */
+.topbar{
+  position:fixed;
+  top:0;
+  width:100%;
+  height:70px;
+  background:#000;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 20px;
+  z-index:3000;
+  border-bottom:1px solid rgba(255,46,46,0.2);
+}
+
+.left{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.hamburger{
+  display:none;
+  cursor:pointer;
+  font-size:18px;
+}
+
+.user-box{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.user-info p{
+  font-weight:700;
+  font-size:13px;
+  color:var(--primary);
+}
+
+.user-info span{
+  font-size:11px;
+  color:#aaa;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar{
+  position:fixed;
+  top:70px;
+  left:0;
+  width:260px;
+  height:100%;
+  background:#0d0d0d;
+  border-right:1px solid rgba(255,46,46,0.15);
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  transition:0.3s;
+  z-index:2000;
+}
+
+.sidebar a{
+  text-decoration:none;
+  color:#aaa;
+  padding:12px;
+  border-radius:10px;
+  display:flex;
+  gap:10px;
+}
+
+.sidebar a:hover{
+  background:rgba(255,46,46,0.1);
+  color:var(--primary);
+}
+
+.sidebar a.active{
+  background:var(--primary);
+  color:#fff;
+}
+
+.logout{
+  margin-top:auto;
+  background:var(--primary);
+  border:none;
+  color:#fff;
+  padding:12px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+/* ===== MAIN ===== */
+.main{
+  margin-left:260px;
+  padding:100px 20px;
+}
+
+/* ===== CARDS ===== */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+}
+
+.card{
+  background:var(--card);
+  padding:20px;
+  border-radius:15px;
+  border:1px solid rgba(255,46,46,0.1);
+  transition:0.3s;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+  border-color:var(--primary);
+}
+
+.card h2{
+  color:var(--primary);
+  margin-top:10px;
+}
+
+/* ===== PANELS ===== */
+.panel{
+  background:var(--card);
+  padding:20px;
+  border-radius:15px;
+  margin-top:20px;
+  border:1px solid rgba(255,46,46,0.1);
+}
+
+/* ===== GRID ===== */
+.grid{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:20px;
+}
+
+/* ===== BUTTON ===== */
+.btn{
+  background:var(--primary);
+  color:#fff;
+  border:none;
+  padding:10px 15px;
+  border-radius:8px;
+  cursor:pointer;
+  margin-top:10px;
+}
+
+/* ===== MOVIES ===== */
+.movies{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:15px;
+}
+
+.movie img{
+  width:100%;
+  height:160px;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media(max-width:1200px){
+  .cards{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:768px){
+
+  .hamburger{
+    display:block;
+  }
+
+  .sidebar{
+    transform:translateX(-100%);
+  }
+
+  .sidebar.active{
+    transform:translateX(0);
+  }
+
+  .main{
+    margin-left:0;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:480px){
+  .cards{
+    grid-template-columns:1fr;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ===== TOP BAR ===== -->
+<header class="topbar">
+
+  <div class="left">
+    <div class="hamburger" onclick="toggleSidebar()">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+    <h2>STACKLY ADMIN</h2>
+  </div>
+
+  <div class="user-box">
+    <div class="user-info">
+      <p id="role">ADMIN</p>
+      <span id="email">admin@stackly.com</span>
+    </div>
+    <i class="fa-regular fa-circle-user"></i>
+  </div>
+
+</header>
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar" id="sidebar">
+
+    <a href="./admin.html"><i class="fa fa-house"></i> Dashboard</a>
+    <a href="./products.html"><i class="fa fa-box"></i> Products</a>
+    <a href="./user.html"><i class="fa fa-users"></i> Users</a>
+    <a href="./orders.html"><i class="fa fa-cart-shopping"></i> Orders</a>
+    <a href="./login.html"><i class="fa fa-cart-shopping"></i> Logout</a>
+
+  <button class="logout" onclick="logout()">Logout</button>
+
+</aside>
+
+<!-- ===== MAIN ===== -->
+<main class="main">
+
+<h1>🔥 Ecommerce Admin Dashboard</h1>
+
+<!-- CARDS -->
+<div class="cards">
+
+  <div class="card"><p>Revenue</p><h2>₹2,45,000</h2></div>
+  <div class="card"><p>Orders</p><h2>8,450</h2></div>
+  <div class="card"><p>Users</p><h2>3,200</h2></div>
+  <div class="card"><p>Products</p><h2>1,250</h2></div>
+
+</div>
+
+<!-- GRID -->
+<div class="grid">
+
+  <div class="panel">
+    <h3>Sales Overview</h3>
+    <canvas id="chart"></canvas>
+  </div>
+
+  <div class="panel">
+    <h3>Quick Stats</h3>
+    <p>🔥 Trending Products: 12</p>
+    <p>📦 Pending Orders: 45</p>
+    <p>⚡ Returns: 8</p>
+    <button class="btn">View Report</button>
+  </div>
+
+</div>
+
+<!-- PRODUCTS -->
+<div class="panel">
+  <h3>Recent Products</h3>
+
+  <div class="movies">
+
+    <div class="movie">
+      <img src="./black kurthi.webp">
+      <p>Bridal Dress</p>
+    </div>
+
+    <div class="movie">
+      <img src="./dress.webp">
+      <p>Fashion Wear</p>
+    </div>
+
+    <div class="movie">
+      <img src="./shirt11.webp">
+      <p>Casual Wear</p>
+    </div>
+
+  </div>
+
+</div>
+
+</main>
+
+<script>
+
+/* SIDEBAR */
+function toggleSidebar(){
+  document.getElementById("sidebar").classList.toggle("active");
+}
+
+/* LOGOUT */
+function logout(){
+  window.location.href="login.html";
+}
+
+/* CHART */
+new Chart(document.getElementById("chart"), {
+  type:'doughnut',
+  data:{
+    labels:["Sales","Orders","Returns"],
+    datasets:[{
+      data:[60,30,10],
+      backgroundColor:["#ff2e2e","#ff6b6b","#ff9999"]
+    }]
+  }
+});
+
+</script>
+
+</body>
+</html>
