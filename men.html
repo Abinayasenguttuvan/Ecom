@@ -548,4 +548,318 @@ document.querySelectorAll(".reveal").forEach(el=>{
   observer.observe(el);
 });
   </script>
+  <!-- ================= FOOTER ================= -->
+<footer class="bio-footer">
+
+    <div class="footer-container">
   
+      <!-- LOGO + ABOUT -->
+  <div class="footer-col">
+    <img src="./logo.webp" class="footer-logo">
+  
+    <p>
+      Advancing biotechnology through innovation and research.
+      Transforming healthcare and life sciences globally.
+    </p>
+  
+    <!-- FOLLOW US -->
+    <h4 class="follow-title">Follow Us</h4>
+  
+    <div class="social-icons">
+      <a href="404.html"><i class="ri-facebook-fill"></i></a>
+      <a href="404.html"><i class="ri-twitter-x-line"></i></a>
+      <a href="404.html"><i class="ri-instagram-line"></i></a>
+      <a href="404.html"><i class="ri-linkedin-fill"></i></a>
+     
+    </div>
+  </div>
+  
+      <!-- QUICK LINKS -->
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+            
+      <li><a href="./index.html">HOME</a></li>
+        <li><a href="./about.html">ABOUT</a></li>
+            <li><a href="./services.html">SERVICES</a></li>
+                <li><a href="./FAQ.html">FAQ</a></li>
+                    <li><a href="./contact.html">CONTACT</a></li>
+        </ul>
+      </div>
+  
+      <!-- LAB SERVICES -->
+      <div class="footer-col">
+        <h4>cyber secrity Services</h4>
+        <ul>
+            <li><a href="404.html">Network Security</a></li>
+            <li><a href="404.html">Threat Detection</a></li>
+            <li><a href="404.html">Managed Security</a></li>
+            <li><a href="404.html">Data Encryption</a></li>
+            <li><a href="404.html">Ransome protection</a></li>
+        </ul>
+      </div>
+  
+      <!-- LOCATION -->
+      <div class="footer-col">
+        <h4>Location</h4>
+        <div class="map">
+          <iframe src="https://www.google.com/maps?q=Salem%20Tamil%20Nadu&output=embed"></iframe>
+        </div>
+      </div>
+  
+      <!-- SUBSCRIBE -->
+      <div class="footer-col">
+        <h4>Research Updates</h4>
+  
+        <div class="subscribe">
+          <input type="email" id="email" placeholder="Enter Email">
+          <button onclick="subscribe()">Subscribe</button>
+        </div>
+  
+        <span id="msg"></span>
+      </div>
+  
+    </div>
+  
+    <!-- BOTTOM -->
+    <div class="footer-bottom">
+      <p>
+        © 2026 BioGen | All Rights Reserved |
+        <a href="404.html">Privacy Policy</a> |
+        <a href="404.html">Terms & Conditions</a>
+      </p>
+    </div>
+  
+  </footer>
+  
+  <style>
+    /* FOLLOW TITLE */
+  .follow-title {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: red;
+  }
+  
+  /* SOCIAL ICONS */
+  .social-icons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  
+  /* ICON STYLE */
+  .social-icons a {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+    font-size: 18px;
+    color: #fff;
+    transition: 0.3s ease;
+  }
+  
+  /* HOVER EFFECT (BIO GLOW) */
+  .social-icons a:hover {
+    /* background: #00f7ff; */
+    color: #000;
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 0 15px red;
+  }
+  
+  /* MOBILE CENTER ALIGN */
+  @media (max-width: 480px) {
+    .social-icons {
+      justify-content: center;
+    }
+  
+    .follow-title {
+      text-align: center;
+    }
+  }
+    /* PRE FOOTER */
+  .pre-footer {
+    background: #0a0f1a;
+    padding: 40px 20px;
+  }
+  
+  .pre-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .pre-box {
+    flex: 1;
+    min-width: 250px;
+    text-align: center;
+    color: #fff;
+  }
+  
+  .pre-box i {
+    font-size: 30px;
+    color: red;
+    margin-bottom: 10px;
+  }
+  
+  /* FOOTER */
+  .bio-footer {
+    background: #05070d;
+    color: #fff;
+    padding: 60px 20px;
+  }
+  
+  .footer-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 30px;
+  }
+  
+  /* LOGO */
+  .footer-logo {
+    width: 140px;
+    margin-bottom: 10px;
+  }
+  
+  /* TEXT */
+  .footer-col p {
+    font-size: 14px;
+    color: #aaa;
+  }
+  
+  /* LINKS */
+  .footer-col h4 {
+    margin-bottom: 15px;
+    color: red;
+  }
+  
+  .footer-col ul {
+    list-style: none;
+  }
+  
+  .footer-col ul li {
+    margin-bottom: 10px;
+  }
+  
+  .footer-col ul li a {
+    color: #aaa;
+    text-decoration: none;
+  }
+  
+  .footer-col ul li a:hover {
+    color: #5f5cff;
+  }
+  
+  /* SOCIAL */
+  .social-icons a {
+    margin-right: 10px;
+    font-size: 20px;
+    color: #fff;
+  }
+  
+  .social-icons a:hover {
+    color: red;
+  }
+  
+  /* MAP */
+  .map iframe {
+    width: 100%;
+    height: 180px;
+    border: 0;
+    border-radius: 10px;
+  }
+  
+  /* SUBSCRIBE */
+  .subscribe {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .subscribe input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+  }
+  
+  .subscribe button {
+    padding: 10px;
+    background:black;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* MESSAGE */
+  #msg {
+    display: block;
+    margin-top: 8px;
+    font-size: 13px;
+  }
+  
+  /* BOTTOM */
+  .footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    border-top: 1px solid #222;
+    padding-top: 15px;
+    font-size: 14px;
+  }
+  
+  .footer-bottom a {
+    color: red;
+    text-decoration: none;
+  }
+  
+  /* ================= RESPONSIVE ================= */
+  
+  /* TABLET */
+  @media (max-width: 1024px) {
+    .footer-container {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .footer-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .subscribe {
+      flex-direction: column;
+    }
+  }
+  
+  /* SMALL MOBILE */
+  @media (max-width: 480px) {
+    .footer-container {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+  
+    .social-icons {
+      margin-top: 10px;
+    }
+  }
+    </style>
+  
+  <script>
+    function subscribe() {
+      let email = document.getElementById("email").value;
+      let msg = document.getElementById("msg");
+    
+      let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    
+      if (email === "" || !email.match(pattern)) {
+        msg.style.color = "red";
+        msg.innerText = "Please fill correct mail id";
+        return;
+      }
+      setTimeout(() => {
+      window.location.href = "404.html";
+    });
+    }
+    </script>

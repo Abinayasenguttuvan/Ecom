@@ -275,6 +275,803 @@
 
 
 
+<style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+    
+    body{
+      background:#0f0f0f;
+    }
+    
+    /* HERO */
+    .hero{
+      position:relative;
+      height:100vh;
+      overflow:hidden;
+    }
+    
+    /* SLIDER */
+    .slider{
+      display:flex;
+      height:100%;
+      transition:1s ease-in-out;
+    }
+    
+    .slide{
+      min-width:100%;
+      height:100%;
+      position:relative;
+    }
+    
+    .slide img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    
+    /* GRADIENT OVERLAY */
+    .slide::after{
+      content:'';
+      position:absolute;
+      width:100%;
+      height:100%;
+      background:linear-gradient(90deg, rgba(0,0,0,0.7), rgba(0,0,0,0.2));
+      top:0;
+      left:0;
+    }
+    
+    /* CONTENT */
+    .content{
+      position:absolute;
+      top:50%;
+      left:8%;
+      transform:translateY(-50%);
+      color:#fff;
+      max-width:550px;
+      z-index:2;
+    
+      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,0.05);
+      padding:30px;
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,0.2);
+    
+      animation:fadeUp 1s ease;
+    }
+    
+    @keyframes fadeUp{
+      from{
+        opacity:0;
+        transform:translateY(40px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(-50%);
+      }
+    }
+    
+    .content h1{
+      font-size:3rem;
+      margin-bottom:10px;
+    }
+    
+    .content p{
+      font-size:1.1rem;
+      margin-bottom:20px;
+      color:#ddd;
+    }
+    
+    /* BUTTONS */
+    .btn{
+      display:inline-block;
+      padding:12px 28px;
+      border-radius:30px;
+      text-decoration:none;
+      margin-right:10px;
+      font-size:0.95rem;
+      transition:0.4s;
+    }
+    
+    .btn-primary{
+      background:#ff4d4d;
+      color:#fff;
+    }
+    
+    .btn-primary:hover{
+      background:#fff;
+      color:#000;
+    }
+    
+    .btn-outline{
+      border:1px solid #fff;
+      color:#fff;
+    }
+    
+    .btn-outline:hover{
+      background:#fff;
+      color:#000;
+    }
+    
+    /* ARROWS */
+    .arrow{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      font-size:28px;
+      color:#fff;
+      background:rgba(0,0,0,0.5);
+      padding:12px;
+      cursor:pointer;
+      z-index:10;
+      border-radius:50%;
+    }
+    
+    .left{ left:15px; }
+    .right{ right:15px; }
+    
+    /* DOTS */
+    .dots{
+      position:absolute;
+      bottom:25px;
+      left:50%;
+      transform:translateX(-50%);
+      display:flex;
+    }
+    
+    .dots span{
+      width:10px;
+      height:10px;
+      margin:5px;
+      border-radius:50%;
+      background:#fff;
+      opacity:0.4;
+      cursor:pointer;
+    }
+    
+    .dots .active{
+      opacity:1;
+      background:#ff4d4d;
+    }
+    
+    /* PROGRESS BAR */
+    .progress{
+      position:absolute;
+      bottom:0;
+      left:0;
+      height:4px;
+      width:0%;
+      background:#ff4d4d;
+      animation:progressAnim 4s linear infinite;
+    }
+    
+    @keyframes progressAnim{
+      0%{width:0;}
+      100%{width:100%;}
+    }
+    
+    /* RESPONSIVE */
+    @media(max-width:992px){
+      .content h1{
+        font-size:2.2rem;
+      }
+    }
+    
+    @media(max-width:768px){
+      .content{
+        left:5%;
+        max-width:90%;
+        padding:20px;
+      }
+    
+      .content h1{
+        font-size:1.8rem;
+      }
+    
+      .content p{
+        font-size:0.95rem;
+      }
+    }
+    
+    @media(max-width:480px){
+      .hero{
+        height:85vh;
+      }
+    
+      .content h1{
+        font-size:1.5rem;
+      }
+    
+      .btn{
+        padding:10px 18px;
+        font-size:0.85rem;
+      }
+    }
+    </style>
+    </head>
+    
+    <body>
+    
+    <section class="hero">
+    
+      <div class="slider" id="slider">
+    
+        <!-- Slide 1 -->
+        <div class="slide">
+          <img src="./2 (1).webp">
+          <div class="content">
+            <h1>Big Sale 50% OFF</h1>
+            <p>Upgrade your wardrobe with the latest trends</p>
+            <a href="./404.html" class="btn btn-primary">Shop Now</a>
+            <a href="./404.html" class="btn btn-outline">Explore</a>
+          </div>
+        </div>
+    
+        <!-- Slide 2 -->
+        <div class="slide">
+          <img src="./shop.webp">
+          <div class="content">
+            <h1>New Arrivals</h1>
+            <p>Fresh styles just landed for this season</p>
+            <a href="./404.html" class="btn btn-primary">Buy Now</a>
+          </div>
+        </div>
+    
+        <!-- Slide 3 -->
+        <div class="slide">
+          <img src="./3 (1).webp">
+          <div class="content">
+            <h1>Premium Collection</h1>
+            <p>Exclusive fashion from top brands</p>
+            <a href="./404.html" class="btn btn-primary">Discover</a>
+          </div>
+        </div>
+    
+      </div>
+    
+      <!-- ARROWS -->
+      <div class="arrow left" onclick="prevSlide()">❮</div>
+      <div class="arrow right" onclick="nextSlide()">❯</div>
+    
+      <!-- DOTS -->
+      <div class="dots" id="dots">
+        <span onclick="goToSlide(0)" class="active"></span>
+        <span onclick="goToSlide(1)"></span>
+        <span onclick="goToSlide(2)"></span>
+      </div>
+    
+      <!-- PROGRESS BAR -->
+      <div class="progress"></div>
+    
+    </section>
+    
+    <script>
+    let index = 0;
+    const slider = document.getElementById("slider");
+    const dots = document.querySelectorAll(".dots span");
+    
+    function showSlide(i){
+      index = i;
+      slider.style.transform = "translateX(" + (-i * 100) + "%)";
+    
+      dots.forEach(dot => dot.classList.remove("active"));
+      dots[i].classList.add("active");
+    
+      resetProgress();
+    }
+    
+    function nextSlide(){
+      index = (index + 1) % 3;
+      showSlide(index);
+    }
+    
+    function prevSlide(){
+      index = (index - 1 + 3) % 3;
+      showSlide(index);
+    }
+    
+    function goToSlide(i){
+      showSlide(i);
+    }
+    
+    /* AUTO SLIDE */
+    let autoSlide = setInterval(nextSlide, 4000);
+    
+    /* RESET PROGRESS */
+    function resetProgress(){
+      const progress = document.querySelector(".progress");
+      progress.style.animation = "none";
+      progress.offsetHeight;
+      progress.style.animation = "progressAnim 4s linear infinite";
+    }
+    </script>
+
+
+
+<section class="combo-section">
+    <h2>SUPER SAVING COMBOS</h2>
+    <p>Top 10 combos you can't resist</p>
+  
+    <div class="combo-grid">
+  
+      <div class="combo-card">
+        <div class="badge">50% OFF</div>
+        <img src="./shirt11.webp">
+        <h4>PLAIN SHIRTS</h4>
+        <div class="rating">⭐⭐⭐⭐☆ <span>(120 reviews)</span></div>
+        <div class="offer-box">
+          <span>PICK ANY 2</span>
+          <span>₹1998</span>
+        </div>
+      </div>
+  
+      <div class="combo-card">
+        <div class="badge">40% OFF</div>
+        <img src="./shoe121.webp">
+        <h4>shoes</h4>
+        <div class="rating">⭐⭐⭐⭐⭐ <span>(98 reviews)</span></div>
+        <div class="offer-box">
+          <span>PICK ANY 2</span>
+          <span>₹1998</span>
+        </div>
+      </div>
+
+
+      <div class="combo-card">
+        <div class="badge">50% OFF</div>
+        <img src="./d2.webp">
+        <h4>Trendy dress</h4>
+        <div class="rating">⭐⭐⭐⭐☆ <span>(120 reviews)</span></div>
+        <div class="offer-box">
+          <span>PICK ANY 2</span>
+          <span>₹1998</span>
+        </div>
+      </div>
+  
+      <div class="combo-card">
+        <div class="badge">40% OFF</div>
+        <img src="./thum1.webp">
+        <h4>Hand bag</h4>
+        <div class="rating">⭐⭐⭐⭐⭐ <span>(98 reviews)</span></div>
+        <div class="offer-box">
+          <span>PICK ANY 2</span>
+          <span>₹1998</span>
+        </div>
+      </div>
+  
+      <!-- Add remaining cards same -->
+      
+    </div>
+  </section>
+
+  <style>
+    body{
+  background:#0f0f0f;
+  font-family:'Poppins',sans-serif;
+}
+
+/* SECTION */
+.combo-section{
+  padding:60px 5%;
+  text-align:center;
+  color:#fff;
+}
+
+.combo-section h2{
+  font-size:2.2rem;
+  margin-bottom:10px;
+}
+
+.combo-section p{
+  color:#aaa;
+  margin-bottom:40px;
+}
+
+/* GRID */
+.combo-grid{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:25px;
+}
+
+/* CARD */
+.combo-card{
+  position:relative;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(10px);
+  border-radius:16px;
+  overflow:hidden;
+  transition:0.3s;
+  border:1px solid rgba(255,255,255,0.1);
+  padding-bottom:10px;
+}
+
+.combo-card:hover{
+  transform:translateY(-8px);
+}
+
+/* ✅ REDUCED IMAGE SIZE */
+.combo-card img{
+  width:100%;
+  height:180px;   /* 🔥 reduced from 260px */
+  object-fit:cover;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+/* TITLE */
+.combo-card h4{
+  margin:10px 0 5px;
+  font-size:1rem;
+}
+
+/* BADGE */
+.badge{
+  position:absolute;
+  top:10px;
+  left:10px;
+  background:#ff4d4d;
+  padding:4px 8px;
+  font-size:0.7rem;
+  border-radius:5px;
+  font-weight:600;
+}
+
+/* RATING */
+.rating{
+  font-size:0.8rem;
+  color:#ffd700;
+  margin-bottom:8px;
+}
+
+.rating span{
+  color:#bbb;
+  font-size:0.75rem;
+}
+
+/* OFFER BOX */
+.offer-box{
+  background:#ff4d4d;
+  display:flex;
+  justify-content:space-between;
+  padding:8px;
+  font-size:0.8rem;
+  border-radius:0 0 16px 16px;
+}
+
+/* RESPONSIVE */
+
+/* Laptop */
+@media(max-width:1200px){
+  .combo-grid{
+    grid-template-columns:repeat(3, 1fr);
+  }
+}
+
+/* Tablet */
+@media(max-width:768px){
+  .combo-grid{
+    grid-template-columns:repeat(2, 1fr);
+  }
+
+  .combo-card img{
+    height:160px; /* smaller */
+  }
+}
+
+/* Mobile */
+@media(max-width:480px){
+  .combo-section{
+    padding:40px 15px;
+  }
+
+  .combo-grid{
+    grid-template-columns:1fr;
+  }
+
+  .combo-card img{
+    height:150px; /* 🔥 smallest */
+  }
+
+  .combo-section h2{
+    font-size:1.6rem;
+  }
+}
+  </style>
+
+<!-- !-- --------- -->
+<!-- GIF BANNER -->
+<section class="gif-banner">
+  <a href="./404.html">
+    <img src="./gif.gif" alt="Sale Banner">
+  </a>
+</section>
+
+<!-- TRENDING PRODUCTS -->
+<section class="product-section">
+  <h2 class="section-title">TRENDING PRODUCTS 🔥</h2>
+
+  <div class="product-grid">
+
+    <!-- CARD -->
+    <div class="product-card">
+      <div class="img-box">
+        <img src="kurtablack.webp">
+        <span class="badge">-30%</span>
+        <span class="wishlist">❤</span>
+      </div>
+
+      <h5>Black Kurta</h5>
+
+      <div class="price-box">
+        <span class="new-price">₹899</span>
+        <span class="old-price">₹1099</span>
+      </div>
+
+      <a href="./404.html" class="cart-btn">Add to Cart</a>
+    </div>
+
+    <div class="product-card">
+      <div class="img-box">
+        <img src="./women.webp">
+        <span class="badge">-40%</span>
+        <span class="wishlist">❤</span>
+      </div>
+
+      <h5>women</h5>
+
+      <div class="price-box">
+        <span class="new-price">₹499</span>
+        <span class="old-price">₹899</span>
+      </div>
+
+      <a href="./404.html" class="cart-btn">Add to Cart</a>
+    </div>
+
+    <div class="product-card">
+      <div class="img-box">
+        <img src="./kid.webp">
+        <span class="badge">-30%</span>
+        <span class="wishlist">❤</span>
+      </div>
+
+      <h5>kid Shirt</h5>
+
+      <div class="price-box">
+        <span class="new-price">₹899</span>
+        <span class="old-price">₹999</span>
+      </div>
+
+      <a href="./404.html" class="cart-btn">Add to Cart</a>
+    </div>
+
+    <div class="product-card">
+      <div class="img-box">
+        <img src="./dress.webp">
+        <span class="badge">-30%</span>
+        <span class="wishlist">❤</span>
+      </div>
+
+      <h5>Party Wear</h5>
+
+      <div class="price-box">
+        <span class="new-price">₹999</span>
+        <span class="old-price">₹1099</span>
+      </div>
+
+      <a href="./404.html" class="cart-btn">Add to Cart</a>
+    </div>
+
+    <div class="product-card">
+      <div class="img-box">
+        <img src="./men1.webp">
+        <span class="badge">-30%</span>
+        <span class="wishlist">❤</span>
+      </div>
+
+      <h5>Plain Shirt</h5>
+
+      <div class="price-box">
+        <span class="new-price">₹699</span>
+        <span class="old-price">₹999</span>
+      </div>
+
+      <a href="./404.html" class="cart-btn">Add to Cart</a>
+    </div>
+
+    <div class="product-card">
+      <div class="img-box">
+        <img src="rcb.webp">
+        <span class="badge">-30%</span>
+        <span class="wishlist">❤</span>
+      </div>
+
+      <h5>Sports Jersey</h5>
+
+      <div class="price-box">
+        <span class="new-price">₹699</span>
+        <span class="old-price">₹999</span>
+      </div>
+
+      <a href="./404.html" class="cart-btn">Add to Cart</a>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* GLOBAL */
+body{
+background:#0f0f0f;
+font-family:'Poppins',sans-serif;
+margin:0;
+}
+
+/* GIF BANNER */
+.gif-banner img{
+width:100%;
+height:280px;
+object-fit:cover;
+border-radius:10px;
+}
+
+/* SECTION */
+.product-section{
+padding:60px 5%;
+text-align:center;
+color:#fff;
+}
+
+.section-title{
+font-size:2.2rem;
+margin-bottom:40px;
+}
+
+/* GRID */
+.product-grid{
+display:grid;
+grid-template-columns:repeat(4, 1fr);
+gap:25px;
+}
+
+/* CARD */
+.product-card{
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(10px);
+border-radius:15px;
+padding:15px;
+transition:0.3s;
+border:1px solid rgba(255,255,255,0.1);
+}
+
+.product-card:hover{
+transform:translateY(-8px);
+}
+
+/* IMAGE */
+.img-box{
+position:relative;
+}
+
+.img-box img{
+width:100%;
+height:180px; /* reduced size */
+object-fit:cover;
+border-radius:10px;
+}
+
+/* BADGE */
+.badge{
+position:absolute;
+top:10px;
+left:10px;
+background:#ff4d4d;
+padding:4px 8px;
+font-size:0.7rem;
+border-radius:5px;
+}
+
+/* WISHLIST */
+.wishlist{
+position:absolute;
+top:10px;
+right:10px;
+background:#000;
+padding:6px;
+border-radius:50%;
+cursor:pointer;
+font-size:0.8rem;
+}
+
+.wishlist:hover{
+color:red;
+}
+
+/* TITLE */
+.product-card h5{
+margin:12px 0 8px;
+}
+
+/* PRICE */
+.price-box{
+margin-bottom:10px;
+}
+
+.new-price{
+color:#ff4d4d;
+font-weight:bold;
+}
+
+.old-price{
+text-decoration:line-through;
+color:#aaa;
+margin-left:8px;
+}
+
+/* BUTTON */
+.cart-btn{
+display:block;
+background:#ff4d4d;
+color:#fff;
+padding:10px;
+border-radius:25px;
+text-decoration:none;
+font-size:0.9rem;
+transition:0.3s;
+}
+
+.cart-btn:hover{
+background:#fff;
+color:#000;
+}
+
+/* RESPONSIVE */
+
+/* Laptop */
+@media(max-width:1200px){
+.product-grid{
+  grid-template-columns:repeat(3,1fr);
+}
+}
+
+/* Tablet */
+@media(max-width:768px){
+.product-grid{
+  grid-template-columns:repeat(2,1fr);
+}
+
+.img-box img{
+  height:160px;
+}
+}
+
+/* Mobile */
+@media(max-width:480px){
+.product-grid{
+  grid-template-columns:1fr;
+}
+
+.section-title{
+  font-size:1.6rem;
+}
+
+.img-box img{
+  height:150px;
+}
+
+.gif-banner img{
+  height:200px;
+}
+}
+</style>
+
+
+
+
+
+
 <!-- ================= FOOTER ================= -->
 <footer class="bio-footer">
 
